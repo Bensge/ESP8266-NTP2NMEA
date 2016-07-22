@@ -50,6 +50,7 @@ void setup()
     Serial.begin(38400);
 #endif
 
+    WiFi.mode(WIFI_STA);
     WiFi.hostname(chip_hostname);
     WiFi.setOutputPower(1);
     WiFi.begin(WIFI_NET_NAME,WIFI_NET_PASSWD);
