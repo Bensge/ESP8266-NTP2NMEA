@@ -1,0 +1,8 @@
+.pioenvs
+.clang_complete
+.gcc-flags.json
+src/Private.h
+
+.travis.yml
+
+lib/readme.txt
