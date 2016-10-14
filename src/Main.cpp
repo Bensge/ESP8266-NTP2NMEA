@@ -115,7 +115,7 @@ void loop()
             char buffer[196];
             snprintf((char *)&buffer,sizeof buffer, "$GPRMC,%02d%02d%02d,A,3751.65,S,14507.36,E,000.0,360.0,%02d%02d%02d,011.3,E*",
                 time->tm_hour,time->tm_min,time->tm_sec,
-                time->tm_mday,time->tm_mon,time->tm_year - 100
+                time->tm_mday,time->tm_mon + 1,time->tm_year - 100
             );
 
             //calculate checksum
