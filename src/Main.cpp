@@ -39,7 +39,7 @@ bool sntp_running = false;
 void refreshTime()
 {
     sntp_running = true;
-    configTime(1 * 3600, 60, "time.euro.apple.com", "0.de.pool.ntp.org", "pool.ntp.org");
+    configTime(1 * 3600, 0, "time.euro.apple.com", "0.de.pool.ntp.org", "pool.ntp.org");
 }
 
 void setup()
@@ -72,13 +72,14 @@ void setup()
 
 bool isEuropeanDST(struct tm *time)
 {
-    if (time->tm_mon < 3 || time->tm_mon > 10)  return false;
-    if (time->tm_mon > 3 && time->tm_mon < 10)  return true;
+    int humanMonth = time->tm_mon + 1;
+    if (humanMonth < 3 || humanMonth > 10)  return false;
+    if (humanMonth > 3 && humanMonth < 10)  return true;
 
     int previousSunday = time->tm_mday - time->tm_wday;
 
-    if (time->tm_mon == 3) return previousSunday >= 25;
-    if (time->tm_mon == 10) return previousSunday < 25;
+    if (humanMonth == 3) return previousSunday >= 25;
+    if (humanMonth == 10) return previousSunday < 25;
 
     return false;
 }
@@ -109,6 +110,8 @@ void loop()
             {
                 t += 60*60;
                 time = sntp_localtime(&t);
+            }
+            else {
             }
 
             //SNTP timestamp refers to 1900, therefore we need to substract 100 from the year to get e.x. "16" for the year 2016
